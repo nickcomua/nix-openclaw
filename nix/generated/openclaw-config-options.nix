@@ -1,4 +1,4 @@
-# Generated from upstream OpenClaw schema at rev 7217b9765833f4e9bc1c7b6c10218be8f9ad9e50. DO NOT EDIT.
+# Generated from upstream OpenClaw schema at rev a2e30824e6232f115b619ec064dafff9d98d5c34. DO NOT EDIT.
 # Generator: nix/scripts/generate-config-options.ts
 { lib }:
 let
@@ -3345,6 +3345,10 @@ in
               type = t.nullOr (t.bool);
               default = null;
             };
+            autoArchiveDuration = lib.mkOption {
+              type = t.nullOr (t.oneOf [ (t.enum [ "60" "1440" "4320" "10080" ]) (t.enum [ 60 ]) (t.enum [ 1440 ]) (t.enum [ 4320 ]) (t.enum [ 10080 ]) ]);
+              default = null;
+            };
             autoThread = lib.mkOption {
               type = t.nullOr (t.bool);
               default = null;
@@ -4330,6 +4334,10 @@ in
           type = t.nullOr (t.attrsOf (t.submodule { options = {
           allow = lib.mkOption {
             type = t.nullOr (t.bool);
+            default = null;
+          };
+          autoArchiveDuration = lib.mkOption {
+            type = t.nullOr (t.oneOf [ (t.enum [ "60" "1440" "4320" "10080" ]) (t.enum [ 60 ]) (t.enum [ 1440 ]) (t.enum [ 4320 ]) (t.enum [ 10080 ]) ]);
             default = null;
           };
           autoThread = lib.mkOption {
@@ -8488,6 +8496,31 @@ in
           type = t.nullOr (t.bool);
           default = null;
         };
+        execApprovals = lib.mkOption {
+          type = t.nullOr (t.submodule { options = {
+          agentFilter = lib.mkOption {
+            type = t.nullOr (t.listOf (t.str));
+            default = null;
+          };
+          approvers = lib.mkOption {
+            type = t.nullOr (t.listOf (t.oneOf [ (t.str) (t.number) ]));
+            default = null;
+          };
+          enabled = lib.mkOption {
+            type = t.nullOr (t.bool);
+            default = null;
+          };
+          sessionFilter = lib.mkOption {
+            type = t.nullOr (t.listOf (t.str));
+            default = null;
+          };
+          target = lib.mkOption {
+            type = t.nullOr (t.enum [ "dm" "channel" "both" ]);
+            default = null;
+          };
+        }; });
+          default = null;
+        };
         groupAllowFrom = lib.mkOption {
           type = t.nullOr (t.listOf (t.oneOf [ (t.str) (t.number) ]));
           default = null;
@@ -9077,6 +9110,31 @@ in
       };
       enabled = lib.mkOption {
         type = t.nullOr (t.bool);
+        default = null;
+      };
+      execApprovals = lib.mkOption {
+        type = t.nullOr (t.submodule { options = {
+        agentFilter = lib.mkOption {
+          type = t.nullOr (t.listOf (t.str));
+          default = null;
+        };
+        approvers = lib.mkOption {
+          type = t.nullOr (t.listOf (t.oneOf [ (t.str) (t.number) ]));
+          default = null;
+        };
+        enabled = lib.mkOption {
+          type = t.nullOr (t.bool);
+          default = null;
+        };
+        sessionFilter = lib.mkOption {
+          type = t.nullOr (t.listOf (t.str));
+          default = null;
+        };
+        target = lib.mkOption {
+          type = t.nullOr (t.enum [ "dm" "channel" "both" ]);
+          default = null;
+        };
+      }; });
         default = null;
       };
       groupAllowFrom = lib.mkOption {
@@ -11851,6 +11909,10 @@ in
             default = null;
           };
           requiresMistralToolIds = lib.mkOption {
+            type = t.nullOr (t.bool);
+            default = null;
+          };
+          requiresOpenAiAnthropicToolPayload = lib.mkOption {
             type = t.nullOr (t.bool);
             default = null;
           };
